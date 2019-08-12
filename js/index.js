@@ -40,3 +40,128 @@ const siteContent = {
 // Example: Update the img src for the logo
 let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"])
+
+
+//Get nav link elements from dom
+let nav_item = document.querySelectorAll('nav a');
+
+//setting nav content
+nav_item.forEach((element, index) => {
+
+  //?? Could I have done this cleaner?
+  let i = index+1;
+  element.textContent = siteContent.nav["nav-item-"+i];
+
+});
+
+//set source logo-img
+document.querySelector('#logo-img').src = siteContent.nav["img-src"];
+
+
+//CTA
+let cta_text = siteContent.cta.h1;
+
+// let cta_text_h1 = document.querySelector('.cta-text h1');
+
+// cta_text_h1.textContent = siteContent['cta']['h1'];
+
+//replace space with line-break <b1>
+let cta_br = cta_text.replace(/ /g, "<br>");
+
+//set cta text
+document.querySelector('.cta-text h1').innerHTML = cta_br;
+
+// document.querySelector('.cta-text h1').textContent = cta_br;
+
+
+//set cta button
+document.querySelector('.cta-text button').textContent = siteContent.cta.button;
+
+//set cta image
+document.querySelector('#cta-img').src = siteContent.cta["img-src"];
+
+//Get text-content elements
+let h4_text_content = document.querySelectorAll('.text-content h4');
+
+let p_text_content = document.querySelectorAll('.text-content p');
+
+
+//Holder Array for Setting Content
+let h4_arr = [];
+
+let text_content_arr = [];
+
+//loop throught main-content keys and assign content to either h4 or content array
+for (let key in siteContent["main-content"])
+{
+  if(key.includes('h4'))
+  {
+    h4_arr.push(siteContent["main-content"][key]);
+  }
+  else if (key.includes('content'))
+  {
+    text_content_arr.push(siteContent["main-content"][key]);
+  }
+}
+
+//set h4 main-content
+h4_text_content.forEach((element, index) => {
+
+  element.textContent = h4_arr[index];
+
+});
+
+//set h4 main-content
+p_text_content.forEach((element, index) => {
+
+  element.textContent = text_content_arr[index];
+
+});
+
+
+//set middle-img
+document.querySelector('.middle-img').src = siteContent["main-content"]["middle-img-src"];
+
+
+//creat array from contact object
+let contact_el = document.querySelector('.contact').children;
+
+//converts contact_el object to array
+let contact_el_arr = Array.from(contact_el);
+
+//get keys for contact json which returns arr and loop
+//and pop obj value into contact element via index location 
+Object.keys(siteContent.contact).forEach((element, index) => {
+
+  contact_el_arr[index].textContent = siteContent.contact[element];
+
+});
+
+//set footer text
+document.querySelector('footer p').textContent = siteContent.footer['copyright'];
+
+
+//create prepend element
+let prepend_el = document.createElement('a');
+//Add text to link
+prepend_el.textContent = 'Prepend';
+//prepend
+document.querySelector('nav').prepend(prepend_el);
+
+
+//create prepend element
+let append_el = document.createElement('a');
+//Add text to link
+append_el.textContent = 'Append';
+//append
+document.querySelector('nav').appendChild(append_el);
+
+
+//change text color of nav links
+document.querySelectorAll('nav a').forEach((element) => {
+  
+  element.style.color = 'green';
+});
+
+
+ console.log(prepend_el);
